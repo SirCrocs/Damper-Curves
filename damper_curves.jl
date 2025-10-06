@@ -203,12 +203,12 @@ function main()
     #Returns interpolation functions for compression and rebound, and also max compression velocity in data set, explicitly cast to Float64 to be safe
     #comp_func, reb_func, max_vel = get_interpolation("DSD_12_HS.csv", Float64(2)) 
 
-    comp_func, reb_func, max_vel = get_func((Float64(2),Float64(3))) #Excepts tuple of floats, gets the appropriate interpolation function based on the settings inputted: (LS, HS)
+    comp_func, reb_func, max_vel = get_func((Float64(0),Float64(3))) #Excepts tuple of floats, gets the appropriate interpolation function based on the settings inputted: (LS, HS)
 
     #Plots and displays damper curves given compression and rebound interpolation functions, from 0-max_vel (mm/sec)
     display_curves(comp_func, reb_func, max_vel)
 
-    display_velocity(100.5) #Displays compression and rebound for each possible setting for a specific velocity (mm/s)
+    #display_velocity(100.5) #Displays compression and rebound for each possible setting for a specific velocity (mm/s)
 
     #Setup so that only velocity has to be passed into get_force function
     get_force = use_funcs(comp_func, reb_func)
@@ -217,7 +217,7 @@ function main()
     comp_val, reb_val = get_force(100.5)
     println("At velocity 100.5 mm/s: Compression ≈ $comp_val, Rebound ≈ $reb_val")
 
-    sleep(20) #Just to show the graph
+    sleep(10) #Just to show the graph
 end
 
 if abspath(PROGRAM_FILE) == @__FILE__
